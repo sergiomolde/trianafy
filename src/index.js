@@ -4,25 +4,18 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import morganBody from "morgan-body";
 import mongoose from "mongoose";
-import user from './routes/user';
+import {auth} from './routes/index';
+import userRepository from './repository/UserRepository';
+import passport from './services/passport/passport';
 
-
-// Imports de componentes del API
-import models from './models';
 const app = express();
 
 app.use(morgan('dev'));
 morganBody(app)
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(passport.initialize());
 
-app.use((req, res, next) => {
-    req.context = {
-        models,
-    };
-    next();
-});
-
-app.use('/', user)
+app.use('/auth', auth);
 
 mongoose.connect(process.env.URIDB, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
   
@@ -33,7 +26,7 @@ mongoose.connect(process.env.URIDB, { useNewUrlParser: true, useUnifiedTopology:
       app.listen(process.env.PORT, () =>
         console.log(
           `¡Trianafy sobre el puerto ${process.env.PORT}!`
-        )
+        ) 
       );
     }
   

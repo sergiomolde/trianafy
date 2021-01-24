@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-const { Schema} = require('mongoose');
+const { Schema } = require('mongoose');
+var mongoose = require('mongoose');
 
 var cancionesSchema = new Schema ({
     title: String,
@@ -10,6 +10,4 @@ var cancionesSchema = new Schema ({
 
 const Cancion = mongoose.model('Cancion', cancionesSchema)
 
-export {
-    Cancion
-}
+module.exports = Cancion

@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
 const { Schema, model} = require('mongoose');
+var mongoose = require('mongoose');
 
 const listaSchema = new Schema ({
     id: String,

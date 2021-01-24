@@ -1,5 +1,5 @@
 import * as users from './User';
-import * as songs from './Cancion'
+import * as songs from './Cancion';
 
 
 export default {
