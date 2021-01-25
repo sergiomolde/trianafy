@@ -2,9 +2,8 @@ import 'dotenv/config';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import { User, userRepository } from '../../models/User';
+import { userRepository } from '../../repository/UserRepository';
 import bcrypt from 'bcryptjs';
-
 
 passport.use(new LocalStrategy({
     usernameField: "username",
@@ -21,7 +20,6 @@ passport.use(new LocalStrategy({
 
 }));
 
-
 const opts = {
     jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey : process.env.JWT_SECRET,
@@ -29,7 +27,7 @@ const opts = {
 };
 
 passport.use('token', new JwtStrategy(opts, (jwt_payload, done)=>{
-
+    
     const user_id = jwt_payload.sub;
 
     const user = userRepository.findById(user_id);

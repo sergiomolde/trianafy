@@ -24,8 +24,9 @@ const userRepository = {
         return Array.isArray(result) && result.length > 0 ? result[0] : undefined
     },
     findById(id) {
-        const posicion = indexOfPorId(id);
-        return posicion == -1 ? undefined : users[posicion];
+        const users = this.findAll();
+        let result = users.filter(user => user.id == id)
+        return result;
     }
 }
 

@@ -6,7 +6,7 @@ const router = Router()
 
 router.post('/register', AuthController.register);
 
-router.get('/prueba', AuthController.encontrarTodo);
+router.get('/prueba', AuthController.findAllUsers);
 
 router.post('/login', password(), AuthController.login)
 

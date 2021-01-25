@@ -4,7 +4,7 @@ import { JwtService } from '../services/jwt/index';
 import bcrypt from 'bcryptjs';
 import { userRepository } from '../repository/UserRepository';
 
-const AuthController = {
+const  AuthController = {
 
     register: (req, res, next) => {
         let password = bcrypt.hashSync(req.body.password, parseInt(process.env.BCRYPT_ROUNDS));
@@ -27,10 +27,13 @@ const AuthController = {
             token: token
         })
     },
-    encontrarTodo: (req, res, next) => {
-        console.log(userRepository.findAll());
-        console.log(userRepository.findAll());
-        return res.json(userRepository.findAll());
+    findAllUsers: async (req, res, next) => {
+        const data = await userRepository.findAll();
+        if(Array.isArray(data) && data.length > 0){
+            res.json(data);
+        } else {
+            res.status(404)
+        }
     }
 }
 

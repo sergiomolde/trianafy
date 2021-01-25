@@ -16,7 +16,7 @@ app.use(passport.initialize());
 
 app.use('/auth', auth);
 
-mongoose.connect(process.env.URIDB, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+mongoose.connect("mongodb://localhost/trianafy", { useNewUrlParser: true, useUnifiedTopology: true }, err => {
   
     if (err) {
       console.log(`Error de conexión a la base de datos: ${JSON.stringify(err)}`);
