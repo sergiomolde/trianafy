@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { AuthController } from '../controller/AuthController';
+import { password } from '../services/passport/index'
 
 const router = Router()
 
 router.post('/register', AuthController.register);
 
-router.post('/login', password(), AuthController.log
-)
+router.get('/prueba', AuthController.encontrarTodo);
+
+router.post('/login', password(), AuthController.login)
 
 export default router;

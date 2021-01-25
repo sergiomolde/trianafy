@@ -5,8 +5,7 @@ import morgan from "morgan";
 import morganBody from "morgan-body";
 import mongoose from "mongoose";
 import {auth} from './routes/index';
-import userRepository from './repository/UserRepository';
-import passport from './services/passport/passport';
+import passport from './services/passport/index';
 
 const app = express();
 

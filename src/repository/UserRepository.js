@@ -15,7 +15,6 @@ const userRepository = {
             email: newUser.email,
             password: password
         });
-        console.log(user);
         const result = await user.save();
         return result;
     },
