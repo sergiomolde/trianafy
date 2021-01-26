@@ -10,6 +10,15 @@ const cancionController = {
         } else {
             res.sendStatus(404);
         }
+    },
+    addSong: (req, res) => {
+        let newSong = {
+            title: req.body.title,
+            artist: req.body.artist,
+            album: req.body.album,
+            year: req.body.year
+        }
+        cancionRepository.create(newSong);
     }
 }
 
