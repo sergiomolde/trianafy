@@ -2,6 +2,7 @@ const { Schema } = require('mongoose');
 var mongoose = require('mongoose');
 
 var cancionesSchema = new Schema ({
+    id: mongoose.ObjectId,
     title: String,
     artist: String,
     album: String,
@@ -10,4 +11,7 @@ var cancionesSchema = new Schema ({
 
 const Cancion = mongoose.model('Cancion', cancionesSchema)
 
-module.exports = Cancion
+
+export {
+    Cancion
+}

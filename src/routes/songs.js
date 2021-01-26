@@ -1,8 +1,11 @@
 import { Router } from 'express';
-import { CancionController } from '../controller/CancionController';
+import { cancionController } from '../controller/CancionController';
 
 const router = Router();
 
 
-router.post('/songs', CancionController.addSong);
-router.get('/songs', CancionController.findAll)
+router.get('/', cancionController.todasCanciones);
+router.post('/', cancionController.addSong);
+router.get('/:id', cancionController.findSongById);
+
+export default router;

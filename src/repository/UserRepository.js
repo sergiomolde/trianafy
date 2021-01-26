@@ -19,12 +19,12 @@ const userRepository = {
         return result;
     },
     findByUsername(username){
-        const users = this.findAll();
+        const users = User.find({});
         let result = users.filter(user => user.username == username);
         return Array.isArray(result) && result.length > 0 ? result[0] : undefined
     },
     findById(id) {
-        const users = this.findAll();
+        const users = User.find({});
         let result = users.filter(user => user.id == id)
         return result;
     }

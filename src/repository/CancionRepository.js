@@ -1,4 +1,4 @@
-import { Cancion } from '../models/Cancion'
+import { Cancion } from '../models/Cancion';
 
 const cancionRepository = {
 
@@ -7,13 +7,19 @@ const cancionRepository = {
         return result;
     },
     async create(newSong){
-        let song = {
+        let song = new Cancion({
             title: newSong.title,
             artist: newSong.artist,
             album: newSong.album,
             year: newSong.year
-        }
-        Cancion.save(song);
+        });
+        const result = await song.save(song);
+        return result;
+    },
+    findSongById(id){
+        const songsList = Cancion.find({});
+        let result = songsList.filter(song => song._id == id)
+        return result;
     }
 }
 
