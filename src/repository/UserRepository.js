@@ -18,15 +18,24 @@ const userRepository = {
         const result = await user.save();
         return result;
     },
-    findByUsername(username){
-        const users = User.find({});
+    async findByUsername (username){
+        const users = await User.find({});
         let result = users.filter(user => user.username == username);
-        return Array.isArray(result) && result.length > 0 ? result[0] : undefined
+        console.log(result);
+        return Array.isArray(result) && result.length > 0 ? result[0] : undefined;
     },
     findById(id) {
         const users = User.find({});
         let result = users.filter(user => user.id == id)
         return result;
+    },
+    toDto(user) {
+        return {
+            id: user.id,
+            name: user.name,
+            username: user.username,
+            email: user.email
+        }
     }
 }
 

@@ -1,4 +1,5 @@
-import { Cancion } from '../models/Cancion';
+import { Cancion } from '../models/Song';
+import mongoose from 'mongoose';
 
 const cancionRepository = {
 
@@ -16,10 +17,25 @@ const cancionRepository = {
         const result = await song.save(song);
         return result;
     },
-    findSongById(id){
-        const songsList = Cancion.find({});
-        let result = songsList.filter(song => song._id == id)
-        return result;
+    async findSongById(id){
+        const song = await Cancion.findById(id, (err) => {
+            if(err){
+                console.log(err);
+            }
+        }).exec();
+        return song;
+    },
+    async modifySongById(id, songModified){
+        await Cancion.findById(id, (err) => {
+            if(err)
+                console.log(err);
+        }).exec();
+        const currentSong = await Cancion.findOneAndUpdate({_id: id}, 
+                                                           {title: songModified.title,
+                                                            artist: songModified.artist,
+                                                            album: songModified.album,
+                                                            year: songModified.year});
+        return currentSong;
     }
 }
 

@@ -1,6 +1,6 @@
 import {
     Cancion
-} from '../models/Cancion';
+} from '../models/Song';
 import {
     cancionRepository
 } from '../repository/CancionRepository';
@@ -32,14 +32,34 @@ const cancionController = {
             res.status(400).send("El título de la canción no es válido.")
         }
     },
-    findSongById: (req, res) => {
-        const song = cancionRepository.findSongById(req.params.id);
-        res.status(201).json({
-            title: song.title,
-            artist: song.artist,
-            album: song.album,
-            year: song.year
-        })
+    findSongById: async(req, res) => {
+        let song = await cancionRepository.findSongById(req.params.id);
+        if(song != null){   
+            res.status(201).json({
+                title: song.title,
+                artist: song.artist,
+                album: song.album,
+                year: song.year
+            })
+        } else {
+            res.send(404)
+        }
+    },
+    updateSong: async(req, res) => {
+        const cancionAModificar = cancionRepository.modifySongById(req.params.id)
+        if(cancionAModificar != null){
+            let newSong = new Song({
+                title: req.body.title,
+                artist: req.body.artist,
+                album: req.body.album,
+                year: req.body.year
+            });
+            await cancionRepository.modifySongById(req.params.id, newSong);
+            res.status(204).send("Cancion modificada con éxito");
+        } else {
+            res.status(404).send("No se ha podido modificar la cancion");
+        }
+
     }
 }
 

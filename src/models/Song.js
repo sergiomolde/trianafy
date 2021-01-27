@@ -9,7 +9,7 @@ var cancionesSchema = new Schema ({
     year: Number
 });
 
-const Cancion = mongoose.model('Cancion', cancionesSchema)
+const Cancion = mongoose.model('Song', cancionesSchema)
 
 
 export {
