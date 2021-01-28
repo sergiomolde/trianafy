@@ -30,21 +30,18 @@ const songRepository = {
         }
     },
     async modifySongById(id, songModified) {
-            await Song.findById(id, (err) => {
-                            if (err)
-                                console.log(err);
-                           }).exec();
-            const currentSong = await Song.findOneAndUpdate({_id: id},
-                                                                {title: songModified.title,
-                                                                artist: songModified.artist,
-                                                                album: songModified.album,
-                                                                year: songModified.year
-                                                                });
-            return currentSong;
+        const currentSong = await Song.findOneAndUpdate({_id: id},
+                                                            {title: songModified.title,
+                                                            artist: songModified.artist,
+                                                            album: songModified.album,
+                                                            year: songModified.year
+                                                            });
+        return currentSong;
     },
     async delete(id){
-        const result = await Song.deleteOne({_id: id})
-        return result;
+        return await Song.deleteOne({
+            _id: id
+        });
     }
 }
 

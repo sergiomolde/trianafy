@@ -2,18 +2,25 @@ const { Schema, model} = require('mongoose');
 var mongoose = require('mongoose');
 
 const listaSchema = new Schema ({
-    id: String,
-    name: String,
-    description: String,
+    name: {
+        type: String,
+        required: "El nombre es obligatorio"
+    },
+    description: {
+        type: String,
+        maxlength: [300, 'Descripción demasiada larga.']
+    },
     user_id: {
-        type: mongoose.objectId,
+        type: mongoose.ObjectId,
         ref: 'User'
     },
     songs:[{
         type: mongoose.ObjectId,
-        ref: 'Cancion'
+        ref: 'Song'
     }]
-})
+}, {
+    versionKey: false
+});
 
-const ListaReproduccion = mongoose.model('Playlist', listaSchema)
-module.exports = ListaReproduccion;
+const Playlist = mongoose.model('Playlist', listaSchema)
+export { Playlist };

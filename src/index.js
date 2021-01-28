@@ -4,8 +4,9 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import morganBody from "morgan-body";
 import mongoose from "mongoose";
-import {auth, songs} from './routes/index';
+import {auth, songs, playlist} from './routes/index';
 import passport from './services/passport/index';
+import cors from 'cors';
 
 // Inicio de Express
 const app = express();
@@ -15,10 +16,12 @@ app.use(morgan('dev'));
 morganBody(app)
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
+app.use(cors());
 
 // Routes
 app.use('/auth', auth);
 app.use('/songs', songs);
+app.use('/lists', playlist);
 
 
 // Conexiones a la base de datos

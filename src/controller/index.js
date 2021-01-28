@@ -1,8 +1,8 @@
 import userController from './UserController';
-import cancionController from './CancionController';
+import songController from './SongController';
 
 
 export default {
-    cancionController,
+    songController,
     userController
 }

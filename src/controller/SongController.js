@@ -65,12 +65,13 @@ const songController = {
         }
 
     },
-    deleteSong: (req, res) => {
-        songRepository.findSongById(req.params.id)
-                      .then(songRepository.delete(req.params.id) && res.sendStatus(204))
-                      .catch((err) => {
-                          res.status(404).send(err);
-                      });
+    deleteSong: async (req, res) => {
+        try{
+            const result = await songRepository.delete(req.params.id);
+            result.deletedCount > 0 ? res.sendStatus(204) : res.status(404).send('No se ha podido encontrar ninguna canción con ese ID');
+        } catch(error) {
+            res.status(404).json({Error:`Ha ocurrido un error en la petición: ${error}`})
+        }
     }
 }
 
