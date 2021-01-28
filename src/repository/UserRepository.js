@@ -1,6 +1,18 @@
 import bcrypt from 'bcryptjs';
-import { User } from '../models/User'
+import { User } from '../models/User';
 
+
+const emailExists = async (emailUser) => {
+    let users = await User.find({}).exec();
+    let emails = users.map(user => user.email);
+    return emails.includes(emailUser);
+}
+
+const usernameExists = async (user) => {
+    let users = await User.find({}).exec();
+    let usernames = users.map(user => user.username);
+    return usernames.includes(user);
+}
 const userRepository = {
 
     async findAll(){
@@ -18,14 +30,11 @@ const userRepository = {
         const result = await user.save();
         return result;
     },
-    async findByUsername (username){
-        const users = await User.find({});
-        let result = users.filter(user => user.username == username);
-        console.log(result);
-        return Array.isArray(result) && result.length > 0 ? result[0] : undefined;
+    async findByUsername (user){
+        return await User.findOne({username: user}).exec();
     },
-    findById(id) {
-        const users = User.find({});
+    async findById(id) {
+        const users = await User.find({});
         let result = users.filter(user => user.id == id)
         return result;
     },
@@ -40,5 +49,7 @@ const userRepository = {
 }
 
 export{
-    userRepository
+    userRepository,
+    emailExists,
+    usernameExists
 }

@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import { cancionController } from '../controller/CancionController';
-import { cancionRepository } from '../repository/CancionRepository';
+import { songController } from '../controller/SongController';
+import { token } from '../services/passport'
 
 const router = Router();
 
 
-router.get('/', cancionController.todasCanciones);
-router.post('/', cancionController.addSong);
-router.get('/:id', cancionController.findSongById);
-router.post('/:id', cancionController.updateSong)
+router.get('/', token(), songController.allSongs);
+router.post('/', token(), songController.addSong);
+router.get('/:id', token(), songController.findSongById);
+router.put('/:id', token(), songController.updateSong);
+router.delete('/:id', token(), songController.deleteSong);
 
 export default router;

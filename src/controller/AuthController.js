@@ -1,18 +1,17 @@
 
-import { User } from '../models/User';
 import { JwtService } from '../services/jwt/index';
-import bcrypt from 'bcryptjs';
 import { userRepository } from '../repository/UserRepository';
+import { User } from '../models/User';
 
 const  AuthController = {
 
     register: (req, res, next) => {
-        let newUsuario = {
+        let newUsuario = new User({
             name: req.body.name,
             username: req.body.username,
             email: req.body.email,
             password: req.body.password
-        };
+        });
         userRepository.addUser(newUsuario);
         res.status(201).json({
             username: newUsuario.username,
