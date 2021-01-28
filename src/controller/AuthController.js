@@ -1,19 +1,17 @@
 
-import { User } from '../models/User';
 import { JwtService } from '../services/jwt/index';
-import bcrypt from 'bcryptjs';
 import { userRepository } from '../repository/UserRepository';
+import { User } from '../models/User';
 
 const  AuthController = {
 
     register: (req, res, next) => {
-        let password = bcrypt.hashSync(req.body.password, parseInt(process.env.BCRYPT_ROUNDS));
-        let newUsuario = {
+        let newUsuario = new User({
             name: req.body.name,
             username: req.body.username,
             email: req.body.email,
-            password: password
-        };
+            password: req.body.password
+        });
         userRepository.addUser(newUsuario);
         res.status(201).json({
             username: newUsuario.username,
@@ -25,14 +23,14 @@ const  AuthController = {
         res.status(201).json({
             user: req.user,
             token: token
-        })
+        });
     },
     findAllUsers: async (req, res, next) => {
         const data = await userRepository.findAll();
         if(Array.isArray(data) && data.length > 0){
             res.json(data);
         } else {
-            res.status(404)
+            res.status(404);
         }
     }
 }

@@ -9,14 +9,18 @@ passport.use(new LocalStrategy({
     usernameField: "username",
     passwordField: "password",
     session: false
-},(username, password, done)=> {
-    const user = userRepository.findByUsername(username);
-    if (user == undefined)
+}, async (username, password, done) => {
+    console.log(username);
+    console.log(password);
+    const user = await userRepository.findByUsername(username);
+    console.log(user);
+    if (user == undefined){
         return done(null, false);
-    else if (!bcrypt.compareSync(password, user.password))
+    }else if (!bcrypt.compareSync(password, user.password)){
         return done(null, false);
-    else
-        return done(null, user.toDto());
+    }else{
+        return done(null, userRepository.toDto(user));
+    }
 
 }));
 
@@ -26,11 +30,11 @@ const opts = {
     algorithms : [process.env.JWT_ALGORITHM]
 };
 
-passport.use('token', new JwtStrategy(opts, (jwt_payload, done)=>{
+passport.use('token', new JwtStrategy(opts, async (jwt_payload, done)=>{
     
     const user_id = jwt_payload.sub;
 
-    const user = userRepository.findById(user_id);
+    const user = await userRepository.findById(user_id);
     if (user == undefined)
         return done(null, false);
     else
@@ -54,7 +58,7 @@ export const password = () => (req, res, next) =>
 export const token = () => (req, res, next) =>
     passport.authenticate('token', { session: false }, (err, user, info) => {
     if (err ||  !user) {
-        return res.status(401).end()
+        return res.status(401).send("401: Necesitas adjuntar un token para poder acceder a esta función.");
     }
     req.logIn(user, { session: false }, (err) => {
         if (err) return res.status(401).end()

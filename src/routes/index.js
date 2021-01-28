@@ -1,6 +1,8 @@
-import auth from './auth'
+import auth from './auth';
+import songs from './songs';
 
 
 export {
-    auth
+    auth,
+    songs
 }

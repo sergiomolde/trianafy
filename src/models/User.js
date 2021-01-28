@@ -9,7 +9,7 @@ let usuarioSchema = new Schema ({
     password: String
 });
 
-const User = mongoose.model('Usuario', usuarioSchema)
+const User = mongoose.model('User', usuarioSchema)
 
 export{
     User

@@ -1,5 +1,5 @@
 import userController from './UserController';
-import cancionController from './CancionController'
+import cancionController from './CancionController';
 
 
 export default {

@@ -15,5 +15,5 @@ const listaSchema = new Schema ({
     }]
 })
 
-const ListaReproduccion = mongoose.model('ListaReproduccion', listaSchema)
+const ListaReproduccion = mongoose.model('Playlist', listaSchema)
 module.exports = ListaReproduccion;

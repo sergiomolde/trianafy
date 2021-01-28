@@ -4,18 +4,24 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import morganBody from "morgan-body";
 import mongoose from "mongoose";
-import {auth} from './routes/index';
+import {auth, songs} from './routes/index';
 import passport from './services/passport/index';
 
+// Inicio de Express
 const app = express();
 
+// Inicializaciones
 app.use(morgan('dev'));
 morganBody(app)
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 
+// Routes
 app.use('/auth', auth);
+app.use('/songs', songs);
 
+
+// Conexiones a la base de datos
 mongoose.connect("mongodb://localhost/trianafy", { useNewUrlParser: true, useUnifiedTopology: true }, err => {
   
     if (err) {
