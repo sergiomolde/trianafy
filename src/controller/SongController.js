@@ -23,14 +23,8 @@ const songController = {
                 album: req.body.album,
                 year: req.body.year
             }
-            await songRepository.create(newSong);
-            res.status(201).json({
-                id: newSong.id,
-                title: newSong.title,
-                artist: newSong.artist,
-                album: newSong.album,
-                year: newSong.year
-            });
+            const result = await songRepository.create(newSong);
+            res.status(201).json(result);
         } else {
             res.status(400).send("El título de la canción no es válido.");
         }

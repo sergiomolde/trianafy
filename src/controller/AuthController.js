@@ -24,14 +24,6 @@ const  AuthController = {
             user: req.user,
             token: token
         });
-    },
-    findAllUsers: async (req, res, next) => {
-        const data = await userRepository.findAll();
-        if(Array.isArray(data) && data.length > 0){
-            res.json(data);
-        } else {
-            res.status(404);
-        }
     }
 }
 

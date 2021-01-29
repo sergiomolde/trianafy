@@ -3,7 +3,7 @@ import songs from './songs';
 import playlist from './playlist'
 
 
-export {
+export default {
     auth,
     songs,
     playlist

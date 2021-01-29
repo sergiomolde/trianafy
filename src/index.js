@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import morganBody from "morgan-body";
 import mongoose from "mongoose";
-import {auth, songs, playlist} from './routes/index';
+import routes from './routes/index';
 import passport from './services/passport/index';
 import cors from 'cors';
 
@@ -19,9 +19,9 @@ app.use(passport.initialize());
 app.use(cors());
 
 // Routes
-app.use('/auth', auth);
-app.use('/songs', songs);
-app.use('/lists', playlist);
+app.use('/auth', routes.auth);
+app.use('/songs', routes.songs);
+app.use('/lists', routes.playlist);
 
 
 // Conexiones a la base de datos
