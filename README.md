@@ -11,12 +11,12 @@ El proyecto consiste en la implementación de una API REST con las tecnologías 
 2. Instalar las dependencias con `npm i`
     #### A caso de que no se haya guardado bien el .gitignore
      - Crear un fichero .env en la raiz del repositorio que contenga las siguientes variables de entorno:
-        - PORT=3000 #Puerto de ejecución de express
-        - DB_URI=mongodb://localhost/trianafy #URI de conexión a la base de datos de mongo para mongoose
-        - JWT_SECRET #Cadena para encryptar el jwt
-        - BCRYPT_ROUNDS=12 #Rondas de encryptación de bcrypt
-        - JWT_LIFETIME=7d #Tiempo en el que va a caducar el jwt
-        - JWT_ALGORITHM=HS256 #Algoritmo de jwt
+        - PORT=9000
+        - DB_URI=mongodb://localhost/trianafy
+        - JWT_SECRET=huaedfASHfusauyKLCiouywjahgfidoJFciAHsUc7US : POR EJEMPLO
+        - BCRYPT_ROUNDS=12
+        - JWT_LIFETIME=7d
+        - JWT_ALGORITHM=HS256
 3. Ejecutar el proyecto usando el comando `npm start`.
 
 ### ENDPOINTS 
