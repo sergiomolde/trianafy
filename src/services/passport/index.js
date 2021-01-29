@@ -10,10 +10,7 @@ passport.use(new LocalStrategy({
     passwordField: "password",
     session: false
 }, async (username, password, done) => {
-    console.log(username);
-    console.log(password);
     const user = await userRepository.findByUsername(username);
-    console.log(user);
     if (user == undefined){
         return done(null, false);
     }else if (!bcrypt.compareSync(password, user.password)){
