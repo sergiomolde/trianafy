@@ -42,7 +42,7 @@ const playlistRepository = {
             })
             .populate('songs')
             .exec();
-        if (result.nModified > 0) {
+        if (result.length > 0) {
             return await Playlist.updateOne({
                 _id: id
             }, {
